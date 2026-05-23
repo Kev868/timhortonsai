@@ -1,11 +1,5 @@
-import { BrandHeader } from "@/components/BrandHeader";
-import { ChatContainer } from "@/components/ChatContainer";
+import { ChatShell } from "@/components/ChatShell";
 
 export default function Home() {
-  return (
-    <>
-      <BrandHeader />
-      <ChatContainer />
-    </>
-  );
+  return <ChatShell />;
 }
