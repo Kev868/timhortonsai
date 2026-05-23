@@ -22,13 +22,6 @@ type ToolItem = {
 };
 type ChatItem = UserItem | AgentItem | ToolItem;
 
-const WELCOME: AgentItem = {
-  kind: "agent",
-  id: "welcome",
-  content: "Hey there, Tim Hortons Customer Care. What's going on?",
-  complete: true,
-};
-
 type StreamEvent =
   | { type: "text_delta"; text: string }
   | { type: "tool_call_start"; id: string; name: string; args: Record<string, unknown> }
@@ -36,8 +29,14 @@ type StreamEvent =
   | { type: "done" }
   | { type: "error"; message: string };
 
+const SUGGESTIONS = [
+  "My Tims Rewards points are missing",
+  "Can you check the balance on my account?",
+  "Something's off with my mobile order",
+];
+
 export function ChatContainer() {
-  const [items, setItems] = useState<ChatItem[]>([WELCOME]);
+  const [items, setItems] = useState<ChatItem[]>([]);
   const [input, setInput] = useState("");
   const [isStreaming, setIsStreaming] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -102,15 +101,15 @@ export function ChatContainer() {
         {
           kind: "agent",
           id: crypto.randomUUID(),
-          content: `Sorry, something went wrong on our end (${event.message}). Mind trying that again?`,
+          content: `Sorry, something went sideways on our end (${event.message}). Mind trying that again?`,
           complete: true,
         },
       ]);
     }
   }
 
-  async function handleSend() {
-    const trimmed = input.trim();
+  async function handleSend(textOverride?: string) {
+    const trimmed = (textOverride ?? input).trim();
     if (!trimmed || isStreaming) return;
 
     const userItem: UserItem = {
@@ -188,6 +187,7 @@ export function ChatContainer() {
     }
   }
 
+  const isEmpty = items.length === 0 && !isStreaming;
   const lastUserIdx = items.reduce(
     (acc, it, i) => (it.kind === "user" ? i : acc),
     -1
@@ -200,41 +200,52 @@ export function ChatContainer() {
   return (
     <main className="flex flex-1 flex-col">
       <div ref={scrollRef} className="flex-1 overflow-y-auto">
-        <div className="mx-auto flex w-full max-w-3xl flex-col gap-4 px-6 py-8">
-          {items.map((item) => {
-            if (item.kind === "user") {
+        {isEmpty ? (
+          <div className="flex h-full items-center justify-center px-6 py-12">
+            <EmptyState onPick={(s) => handleSend(s)} />
+          </div>
+        ) : (
+          <div className="mx-auto flex w-full max-w-3xl flex-col gap-4 px-6 py-8">
+            {items.map((item, idx) => {
+              const prevItem = items[idx - 1];
+              const tightTop =
+                item.kind === "tool" && prevItem?.kind === "tool"
+                  ? "-mt-2"
+                  : "";
+
+              if (item.kind === "user") {
+                return (
+                  <div key={item.id} className="message-in">
+                    <Message role="user">{item.content}</Message>
+                  </div>
+                );
+              }
+              if (item.kind === "agent") {
+                return (
+                  <div key={item.id} className="message-in">
+                    <Message role="agent">{item.content}</Message>
+                  </div>
+                );
+              }
               return (
-                <Message key={item.id} role="user">
-                  {item.content}
-                </Message>
+                <div key={item.id} className={`message-in ${tightTop}`}>
+                  <ToolCallCard
+                    name={item.name}
+                    args={item.args}
+                    result={item.result}
+                  />
+                </div>
               );
-            }
-            if (item.kind === "agent") {
-              return (
-                <Message key={item.id} role="agent">
-                  {item.content}
-                </Message>
-              );
-            }
-            return (
-              <ToolCallCard
-                key={item.id}
-                name={item.name}
-                args={item.args}
-                result={item.result}
-                startMs={item.startMs}
-                endMs={item.endMs}
-              />
-            );
-          })}
-          {showThinking && (
-            <div className="flex items-start gap-3">
-              <div className="flex h-9 w-9 shrink-0 animate-pulse items-center justify-center rounded-full bg-tims-red text-base font-extrabold text-white shadow-sm">
-                T
+            })}
+            {showThinking && (
+              <div className="flex items-start gap-3">
+                <div className="flex h-9 w-9 shrink-0 animate-pulse items-center justify-center rounded-full bg-tims-red text-base font-extrabold text-white shadow-sm">
+                  T
+                </div>
               </div>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+        )}
       </div>
       <div className="border-t border-tims-border bg-tims-surface">
         <div className="mx-auto flex w-full max-w-3xl items-center gap-3 px-6 py-4">
@@ -249,14 +260,42 @@ export function ChatContainer() {
           />
           <button
             type="button"
-            onClick={handleSend}
+            onClick={() => handleSend()}
             disabled={!input.trim() || isStreaming}
-            className="rounded-full bg-tims-red px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-tims-red-deep disabled:cursor-not-allowed disabled:opacity-60"
+            className="rounded-full bg-tims-red px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-tims-red-deep active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
           >
             Send
           </button>
         </div>
       </div>
     </main>
+  );
+}
+
+function EmptyState({ onPick }: { onPick: (s: string) => void }) {
+  return (
+    <div className="flex max-w-lg flex-col items-center text-center">
+      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-tims-red text-2xl font-extrabold text-white shadow-md">
+        T
+      </div>
+      <h1 className="mt-6 text-2xl font-bold tracking-tight text-tims-ink sm:text-3xl">
+        Tim Hortons Customer Care
+      </h1>
+      <p className="mt-3 text-base text-tims-ink-soft">
+        Hey there! What can I help ya with today?
+      </p>
+      <div className="mt-8 flex flex-wrap justify-center gap-2">
+        {SUGGESTIONS.map((s) => (
+          <button
+            key={s}
+            type="button"
+            onClick={() => onPick(s)}
+            className="rounded-full border border-tims-border bg-tims-surface px-4 py-2 text-sm font-medium text-tims-ink shadow-sm transition hover:-translate-y-0.5 hover:border-tims-red/40 hover:bg-tims-cream"
+          >
+            {s}
+          </button>
+        ))}
+      </div>
+    </div>
   );
 }
