@@ -1,6 +1,6 @@
 import type { NextRequest } from "next/server";
 import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
-import { openai, MODEL } from "@/lib/openai";
+import { getOpenAI, MODEL } from "@/lib/openai";
 import { callTool, resetMockState, toolSchemas } from "@/lib/tools";
 import { SYSTEM_PROMPT } from "@/lib/system-prompt";
 
@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
 
       try {
         for (let iter = 0; iter < MAX_ITERATIONS; iter++) {
-          const completion = await openai.chat.completions.create({
+          const completion = await getOpenAI().chat.completions.create({
             model: MODEL,
             messages,
             tools: toolSchemas,
