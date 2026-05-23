@@ -1,0 +1,54 @@
+{
+  "accounts": [
+    {
+      "account_id": "A4F2B1",
+      "name": "Sarah Chen",
+      "phone": "+14165551234",
+      "email": "sarah.chen@gmail.com",
+      "home_store": "Tim Hortons #1247, Bloor & Yonge, Toronto",
+      "tier": "Gold",
+      "member_since": "2019-03-12",
+      "visible_balance": 0,
+      "expected_balance": 850,
+      "discrepancy_flag": true,
+      "discrepancy_reason": "Regional sync bug triggered by a cross-province purchase in Calgary on 2026-05-21. Visible balance zeroed at the device layer; system-of-truth balance preserved.",
+      "last_5_transactions": [
+        {
+          "date": "2026-05-23T08:14:00Z",
+          "location": "Tim Hortons #1247, Bloor & Yonge, Toronto",
+          "amount": 4.85,
+          "points_earned": 48,
+          "points_balance_after": 0
+        },
+        {
+          "date": "2026-05-21T13:42:00Z",
+          "location": "Tim Hortons #2284, Stephen Ave, Calgary",
+          "amount": 7.30,
+          "points_earned": 73,
+          "points_balance_after": 0
+        },
+        {
+          "date": "2026-05-20T07:58:00Z",
+          "location": "Tim Hortons #1247, Bloor & Yonge, Toronto",
+          "amount": 4.85,
+          "points_earned": 48,
+          "points_balance_after": 777
+        },
+        {
+          "date": "2026-05-18T18:23:00Z",
+          "location": "Tim Hortons #1247, Bloor & Yonge, Toronto",
+          "amount": 6.50,
+          "points_earned": 65,
+          "points_balance_after": 729
+        },
+        {
+          "date": "2026-05-17T09:11:00Z",
+          "location": "Tim Hortons #1247, Bloor & Yonge, Toronto",
+          "amount": 3.20,
+          "points_earned": 32,
+          "points_balance_after": 664
+        }
+      ]
+    }
+  ]
+}
