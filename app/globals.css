@@ -1,26 +1,36 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --tims-red: #C8102E;
+  --tims-red-deep: #A50D26;
+  --tims-brown: #5C2E13;
+  --tims-cream: #FBF4E8;
+  --tims-surface: #FFFFFF;
+  --tims-ink: #2A1A12;
+  --tims-ink-soft: #6B5A4E;
+  --tims-border: #EADFC8;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-tims-red: var(--tims-red);
+  --color-tims-red-deep: var(--tims-red-deep);
+  --color-tims-brown: var(--tims-brown);
+  --color-tims-cream: var(--tims-cream);
+  --color-tims-surface: var(--tims-surface);
+  --color-tims-ink: var(--tims-ink);
+  --color-tims-ink-soft: var(--tims-ink-soft);
+  --color-tims-border: var(--tims-border);
+  --font-sans: var(--font-figtree), system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  background: var(--tims-cream);
+  color: var(--tims-ink);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-figtree), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
