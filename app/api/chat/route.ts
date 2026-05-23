@@ -1,8 +1,5 @@
 import type { NextRequest } from "next/server";
-import type {
-  ChatCompletionMessageParam,
-  ChatCompletionMessageToolCall,
-} from "openai/resources/chat/completions";
+import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 import { openai, MODEL } from "@/lib/openai";
 import { callTool, resetMockState, toolSchemas } from "@/lib/tools";
 import { SYSTEM_PROMPT } from "@/lib/system-prompt";
@@ -89,13 +86,13 @@ export async function POST(req: NextRequest) {
             finishReason === "tool_calls" &&
             Object.keys(accumulatedToolCalls).length > 0
           ) {
-            const toolCalls: ChatCompletionMessageToolCall[] = Object.values(
-              accumulatedToolCalls
-            ).map((tc) => ({
-              id: tc.id,
-              type: "function",
-              function: { name: tc.name, arguments: tc.arguments },
-            }));
+            const toolCalls = Object.values(accumulatedToolCalls).map(
+              (tc) => ({
+                id: tc.id,
+                type: "function" as const,
+                function: { name: tc.name, arguments: tc.arguments },
+              })
+            );
 
             messages.push({
               role: "assistant",
