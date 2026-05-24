@@ -26,6 +26,12 @@ const TIMS_KEYWORDS = [
 ];
 
 const OFF_TOPIC_KEYWORDS = [
+  // Weather / world events (unambiguous)
+  "weather", "forecast", "humidity",
+  // News / politics (unambiguous)
+  "news", "politics", "election",
+  // Sports (unambiguous)
+  "hockey", "basketball", "soccer", "baseball",
   // Meta / jailbreak attempts (security-critical, always block)
   "system prompt", "your instructions", "your prompt",
   "ignore your", "ignore previous", "you are now", "developer mode",

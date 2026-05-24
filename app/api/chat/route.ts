@@ -72,7 +72,7 @@ export async function POST(req: NextRequest) {
             messages,
             tools: toolSchemas,
             stream: true,
-            temperature: 0.5,
+            temperature: 0.3,
           });
 
           let accumulatedContent = "";
