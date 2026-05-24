@@ -9,38 +9,38 @@ const TIMS_KEYWORDS = [
   // Products
   "coffee", "double-double", "double double", "timbit", "timbits", "donut",
   "doughnut", "iced cap", "iced capp", "bagel", "muffin", "wrap", "sandwich",
-  "latte", "espresso", "tea", "hot chocolate", "breakfast",
-  // Rewards
+  "latte", "espresso", "tea", "hot chocolate", "breakfast", "lunch",
+  "menu", "drink", "food", "item", "meal", "combo", "size",
+  // Rewards & promotions
   "reward", "rewards", "point", "points", "perk", "perks", "redeem", "tier",
   "gold", "standard", "member", "membership", "balance",
+  "roll up", "rim", "camp", "camps", "camp day",
   // Operational
-  "mobile order", "drive-thru", "drive thru", "store", "location", "hours",
-  "app", "account", "card", "scan", "qr", "refund", "order", "missing",
-  "wrong", "complaint", "purchase",
+  "mobile order", "drive-thru", "drive thru", "drivethrough", "pickup",
+  "store", "location", "hours", "open", "close",
+  "app", "account", "card", "scan", "qr", "code", "barcode",
+  "refund", "order", "missing", "wrong", "complaint", "purchase", "receipt",
   // Conversational follow-ups
   "thanks", "thank you", "yes", "no", "ok", "okay", "sure", "please",
-  "help", "hi", "hey", "hello", "bye", "cheers",
+  "help", "hi", "hey", "hello", "bye", "cheers", "morning", "afternoon",
 ];
 
 const OFF_TOPIC_KEYWORDS = [
-  // Weather / news / events
-  "weather", "temperature", "rain", "snow", "forecast", "humidity",
-  "news", "politics", "election", "stock", "stocks", "crypto", "bitcoin",
-  // Sports
-  "hockey", "basketball", "soccer", "football", "baseball", "raptors", "leafs",
-  // Other food brands
+  // Weather / news / world events (unambiguous)
+  "weather", "forecast", "humidity",
+  "news", "politics", "election", "crypto", "bitcoin",
+  // Sports (unambiguous)
+  "hockey", "basketball", "soccer", "baseball", "raptors", "leafs",
+  // Other food brands (clear competitor questions)
   "starbucks", "mcdonald", "mcdonalds", "wendy", "subway", "dunkin",
   "burger king", "chipotle", "popeyes", "kfc",
-  // Generic non-Tims tasks
-  "joke", "poem", "story", "song", "rap", "lyrics",
-  "code", "coding", "programming", "javascript", "python", "typescript",
-  "math", "calculate", "equation", "algebra", "calculus",
-  "homework", "essay", "translation", "translate",
-  // Meta / jailbreak
-  "system prompt", "your instructions", "your prompt", "ignore your",
-  "ignore previous", "you are now", "developer mode", "jailbreak",
-  "pretend you", "roleplay", "role-play", "role play", "hypothetical",
-  "imagine you", "act as", "respond as if",
+  // Programming (clear non-customer-service)
+  "javascript", "python", "typescript",
+  // Meta / jailbreak (always off-topic)
+  "system prompt", "your instructions", "your prompt",
+  "ignore your", "ignore previous", "you are now", "developer mode",
+  "jailbreak", "pretend you", "roleplay", "role-play", "role play",
+  "act as", "respond as if",
 ];
 
 function containsAnyWord(text: string, words: string[]): boolean {
