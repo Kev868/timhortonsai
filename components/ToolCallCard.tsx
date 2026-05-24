@@ -9,6 +9,7 @@ const PENDING: Record<string, string> = {
   check_rewards_balance: "Checking the rewards balance…",
   restore_rewards_points: "Restoring the points…",
   issue_perk: "Issuing a perk…",
+  lookup_faq: "Searching the FAQ…",
 };
 
 const FAILED: Record<string, string> = {
@@ -16,6 +17,7 @@ const FAILED: Record<string, string> = {
   check_rewards_balance: "Couldn't pull the balance.",
   restore_rewards_points: "Couldn't restore the points.",
   issue_perk: "Couldn't issue the perk.",
+  lookup_faq: "FAQ search came up empty.",
 };
 
 type Result = Record<string, unknown>;
@@ -50,6 +52,14 @@ const DONE: Record<string, (args: Result, result: Result) => string> = {
     const perk = String(args.perk_type ?? "").replace(/_/g, " ");
     const valid = typeof r.valid_until === "string" ? formatDate(r.valid_until) : "?";
     return `Issued ${perk} perk, valid until ${valid}.`;
+  },
+  lookup_faq: (args, r) => {
+    const query = String(args.query ?? "");
+    const matches = Array.isArray(r.matches) ? r.matches : [];
+    if (matches.length === 0) return `Searched the FAQ for "${query}": no matches.`;
+    const top = matches[0] as { question?: string; score?: number };
+    const score = typeof top.score === "number" ? top.score.toFixed(2) : "?";
+    return `Searched the FAQ for "${query}": top match "${top.question ?? "?"}" (similarity ${score}).`;
   },
 };
 

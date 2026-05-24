@@ -1,0 +1,155 @@
+{
+  "source": "Curated from public Tim Hortons brand and Tims Rewards information for Tim Hortons AI Care demo. Not an official Tim Hortons document.",
+  "entries": [
+    {
+      "id": "rewards-overview",
+      "category": "rewards",
+      "question": "How does Tims Rewards work?",
+      "answer": "Tims Rewards is the loyalty program for Tim Hortons. Members earn points on most purchases at participating Tim Hortons locations in Canada and can redeem those points for menu items like brewed coffee, baked goods, and breakfast sandwiches. You can join through the Tims app or with a physical Rewards card, and points sync automatically when you scan at checkout."
+    },
+    {
+      "id": "rewards-earn-rate",
+      "category": "rewards",
+      "question": "How do I earn Tims Rewards points?",
+      "answer": "You earn points by scanning your Tims Rewards card or app QR code at checkout. Points are typically awarded per dollar spent on eligible purchases. Bonus points are sometimes offered through targeted offers in the app, like double points days or new product launches."
+    },
+    {
+      "id": "rewards-redemption",
+      "category": "rewards",
+      "question": "What can I redeem Tims Rewards points for?",
+      "answer": "Points can be redeemed for a range of menu items including brewed coffee, baked goods (donuts, muffins, bagels), breakfast sandwiches, and Iced Capps. The number of points required varies by item and is shown in the Tims app under the Rewards section. New rewards rotate in seasonally."
+    },
+    {
+      "id": "rewards-tiers",
+      "category": "rewards",
+      "question": "What's the difference between Standard and Gold tier in Tims Rewards?",
+      "answer": "Standard tier is the default for new members. Gold tier is reached after a certain number of qualifying visits in a calendar year and unlocks bonus offers, priority perks, and occasional surprises. You'll see your current tier in the Tims app and a progress bar toward Gold if you're on Standard."
+    },
+    {
+      "id": "rewards-expiry",
+      "category": "rewards",
+      "question": "Do Tims Rewards points expire?",
+      "answer": "Points generally do not expire as long as your account stays active. An account is considered active if you earn or redeem at least once within a rolling 12-month window. If your account goes inactive for longer than that, points may expire."
+    },
+    {
+      "id": "rewards-check-balance",
+      "category": "rewards",
+      "question": "How do I check my Tims Rewards points balance?",
+      "answer": "Open the Tims app and tap on the Rewards tab to see your current balance, your tier, and your recent transaction history. You can also see your balance on a printed receipt right after a purchase."
+    },
+    {
+      "id": "rewards-missing-points",
+      "category": "rewards",
+      "question": "What do I do if my Tims Rewards points are missing?",
+      "answer": "If a recent purchase didn't show up in your point history, or your balance dropped unexpectedly, the fastest fix is to chat with Tim Hortons customer care. We can look up your account, check the system-of-truth balance, and restore points if there's a sync issue. Keep a recent receipt handy if you have one, but it's not required."
+    },
+    {
+      "id": "rewards-merge-accounts",
+      "category": "rewards",
+      "question": "Can I merge two Tims Rewards accounts?",
+      "answer": "Account merges aren't something we can do directly from chat. If you have two accounts under the same phone or email, contact Tim Hortons customer care through the app or website, and they'll start a merge request. You'll need to verify both accounts."
+    },
+    {
+      "id": "rewards-transfer-points",
+      "category": "rewards",
+      "question": "Can I transfer Tims Rewards points to someone else?",
+      "answer": "Points are tied to the individual account and can't be transferred to another member. You can, however, gift redeemed items (like buying a coffee for a friend) if you're together at a store."
+    },
+    {
+      "id": "mobile-order-how-to",
+      "category": "mobile-order",
+      "question": "How do I place a mobile order with Tim Hortons?",
+      "answer": "In the Tims app, tap Order, choose a pickup location, pick your items and any customizations, then pay through the app. You'll get a notification when your order is ready for pickup at the counter, drive-thru, or curbside if the location offers it."
+    },
+    {
+      "id": "mobile-order-customize",
+      "category": "mobile-order",
+      "question": "Can I customize a drink in a Tim Hortons mobile order?",
+      "answer": "Yes. When you tap a drink in the Tims app, you'll see options for size, milk type, sweetener, extra shots of espresso, and toppings depending on the drink. Some specialty drinks have fewer customization options."
+    },
+    {
+      "id": "mobile-order-modify",
+      "category": "mobile-order",
+      "question": "Can I change or cancel a mobile order after I've placed it?",
+      "answer": "Once a mobile order is sent to the store, it usually can't be modified through the app since the team starts preparing it right away. If you need to change something, the best bet is to call the store directly or speak to a team member at pickup."
+    },
+    {
+      "id": "mobile-order-wrong-item",
+      "category": "mobile-order",
+      "question": "What do I do if my mobile order is missing items or wrong?",
+      "answer": "If your order is missing items or made incorrectly, customer care can issue a goodwill perk (like a free coffee or double points day) on your account while you sort it out with the store. Keep your order number ready so we can look it up."
+    },
+    {
+      "id": "store-hours-policy",
+      "category": "store",
+      "question": "Are all Tim Hortons locations open 24 hours?",
+      "answer": "No. Most Tim Hortons locations have set opening and closing hours that vary by location, with many opening early morning (4 to 6 a.m.) and closing in the evening. Some highway and 24-hour service locations stay open around the clock. Check the Tims app or website for hours at your specific location."
+    },
+    {
+      "id": "store-finder",
+      "category": "store",
+      "question": "How do I find a Tim Hortons near me?",
+      "answer": "In the Tims app, tap the Locations tab and grant location access. You'll see nearby stores with distance, hours, and which services they offer (mobile order, drive-thru, dine-in). The same store finder is on timhortons.ca."
+    },
+    {
+      "id": "store-services-pickup",
+      "category": "store",
+      "question": "Does every Tim Hortons have drive-thru and curbside pickup?",
+      "answer": "Most standalone Tim Hortons stores have a drive-thru, but locations inside malls, gas stations, or universities often don't. Curbside pickup is available at participating locations and you'll see it as an option in the Tims app when you choose a store."
+    },
+    {
+      "id": "menu-allergens",
+      "category": "menu",
+      "question": "How do I find allergen information for Tim Hortons menu items?",
+      "answer": "Detailed nutrition and allergen info for every menu item is available on timhortons.ca under the Menu section. The Tims app also shows nutrition info when you tap into a menu item. If you have specific allergy concerns, ask the team at your store before ordering since cross-contact is possible in our kitchens."
+    },
+    {
+      "id": "menu-gluten-free",
+      "category": "menu",
+      "question": "Does Tim Hortons have gluten-free options?",
+      "answer": "Tim Hortons doesn't currently offer certified gluten-free baked goods, since all our baked items are produced in shared kitchens where cross-contact can happen. Some non-baked items like brewed coffee, plain teas, and certain breakfast components are naturally gluten-free, but we can't guarantee them safe for someone with celiac disease."
+    },
+    {
+      "id": "menu-vegan",
+      "category": "menu",
+      "question": "What vegan or plant-based options does Tim Hortons have?",
+      "answer": "We offer oat milk, almond milk, and soy milk as plant-based options for hot and iced drinks. Some seasonal items are plant-based; check the current menu in the Tims app. Most of our baked goods contain dairy or eggs, so the vegan-friendly options skew toward drinks."
+    },
+    {
+      "id": "tims-card-physical",
+      "category": "rewards",
+      "question": "Do I still need a physical Tims Rewards card if I have the app?",
+      "answer": "No, the Tims app does everything a physical card does and more. The app stores your QR code for in-store scanning, shows your points balance, lets you place mobile orders, and surfaces personalized offers. If you prefer a physical card, those are still available in stores."
+    },
+    {
+      "id": "donation-tims-camps",
+      "category": "company",
+      "question": "What is the Tim Horton Children's Foundation?",
+      "answer": "The Tim Horton Children's Foundation is the company's charitable arm. It runs Tims Camps, multi-day overnight camp experiences for children and youth from underserved communities across Canada and the United States, free of charge to families. Proceeds from Camp Day each year support the foundation."
+    },
+    {
+      "id": "roll-up-the-rim",
+      "category": "promotions",
+      "question": "How does Roll Up The Rim work?",
+      "answer": "Roll Up The Rim is Tim Hortons' annual contest. During the promotion period, eligible purchases in the Tims app give you a chance to win prizes ranging from free menu items to vehicles and electronics. Roll Ups happen in-app under the Rewards section; the paper-cup version was retired in favour of the digital roll."
+    },
+    {
+      "id": "complaint-channel",
+      "category": "support",
+      "question": "How do I file a complaint with Tim Hortons?",
+      "answer": "You can share feedback or file a complaint through the Tim Hortons app under the Profile menu, on the Contact Us page at timhortons.ca, or by chatting with customer care. For complaints about a specific visit, including the store number, date, and time helps us route it to the right team."
+    },
+    {
+      "id": "refund-policy",
+      "category": "support",
+      "question": "What's Tim Hortons' refund policy on mobile orders?",
+      "answer": "Refunds for mobile order issues are usually handled by the individual store, since they're best positioned to verify what went wrong. Customer care can issue goodwill perks (free coffee, double points day) on your Rewards account while the store sorts the refund, but the refund itself goes through them."
+    },
+    {
+      "id": "career-jobs",
+      "category": "company",
+      "question": "How do I apply for a job at Tim Hortons?",
+      "answer": "Open positions for both store team members and corporate roles are listed at timhortons.ca/careers. You can filter by location and role type. Applications for store positions usually go through the franchisee who owns the location, so timelines can vary by store."
+    }
+  ]
+}

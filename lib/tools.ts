@@ -1,5 +1,6 @@
 import accountsData from "@/data/mock-accounts.json";
 import type { ChatCompletionTool } from "openai/resources/chat/completions";
+import { retrieveFaq } from "./rag";
 
 type Transaction = {
   date: string;
@@ -104,6 +105,26 @@ export const toolSchemas: ChatCompletionTool[] = [
   {
     type: "function",
     function: {
+      name: "lookup_faq",
+      description:
+        "Search the Tim Hortons FAQ knowledge base for information about policies, rewards program details, mobile orders, menu, store services, etc. Use this for any informational question the customer asks where the answer is not derivable from their account data. Returns the top matching FAQ entries with a similarity score.",
+      parameters: {
+        type: "object",
+        properties: {
+          query: {
+            type: "string",
+            description:
+              "The customer's question rephrased as a concise search query.",
+          },
+        },
+        required: ["query"],
+        additionalProperties: false,
+      },
+    },
+  },
+  {
+    type: "function",
+    function: {
       name: "issue_perk",
       description:
         "Grant a goodwill perk on the customer's account. Use this to make things right after a service issue.",
@@ -148,9 +169,25 @@ export async function callTool(
         String(args.account_id ?? ""),
         String(args.perk_type ?? "") as PerkType
       );
+    case "lookup_faq":
+      return lookupFaq(String(args.query ?? ""));
     default:
       return { error: `Unknown tool: ${name}` };
   }
+}
+
+async function lookupFaq(query: string): Promise<ToolResult> {
+  if (!query.trim()) {
+    return { matches: [], message: "Empty query." };
+  }
+  const matches = await retrieveFaq(query, 3);
+  return {
+    matches: matches.map((m) => ({
+      question: m.question,
+      answer: m.answer,
+      score: Number(m.score.toFixed(3)),
+    })),
+  };
 }
 
 function lookupAccount(phoneOrEmail: string): ToolResult {

@@ -32,7 +32,7 @@ type StreamEvent =
 const SUGGESTIONS = [
   "My Tims Rewards points are missing",
   "Can you check the balance on my account?",
-  "Something's off with my mobile order",
+  "How does Tims Rewards work?",
 ];
 
 export function ChatContainer() {
