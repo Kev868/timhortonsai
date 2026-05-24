@@ -10,6 +10,7 @@ const PENDING: Record<string, string> = {
   restore_rewards_points: "Restoring the points…",
   issue_perk: "Issuing a perk…",
   lookup_faq: "Searching the FAQ…",
+  scope_check: "Checking topic scope…",
 };
 
 const FAILED: Record<string, string> = {
@@ -18,6 +19,7 @@ const FAILED: Record<string, string> = {
   restore_rewards_points: "Couldn't restore the points.",
   issue_perk: "Couldn't issue the perk.",
   lookup_faq: "FAQ search came up empty.",
+  scope_check: "Scope check errored.",
 };
 
 type Result = Record<string, unknown>;
@@ -60,6 +62,13 @@ const DONE: Record<string, (args: Result, result: Result) => string> = {
     const top = matches[0] as { question?: string; score?: number };
     const score = typeof top.score === "number" ? top.score.toFixed(2) : "?";
     return `Searched the FAQ for "${query}": top match "${top.question ?? "?"}" (similarity ${score}).`;
+  },
+  scope_check: (_args, r) => {
+    const inScope = r.in_scope === true;
+    const reason = typeof r.reason === "string" ? r.reason : "";
+    return inScope
+      ? `Scope check: in scope${reason ? " — " + reason : ""}.`
+      : `Scope check: OUT OF SCOPE${reason ? " — " + reason : ""}. Refusing.`;
   },
 };
 
