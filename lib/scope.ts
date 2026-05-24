@@ -26,21 +26,10 @@ const TIMS_KEYWORDS = [
 ];
 
 const OFF_TOPIC_KEYWORDS = [
-  // Weather / news / world events (unambiguous)
-  "weather", "forecast", "humidity",
-  "news", "politics", "election", "crypto", "bitcoin",
-  // Sports (unambiguous)
-  "hockey", "basketball", "soccer", "baseball", "raptors", "leafs",
-  // Other food brands (clear competitor questions)
-  "starbucks", "mcdonald", "mcdonalds", "wendy", "subway", "dunkin",
-  "burger king", "chipotle", "popeyes", "kfc",
-  // Programming (clear non-customer-service)
-  "javascript", "python", "typescript",
-  // Meta / jailbreak (always off-topic)
+  // Meta / jailbreak attempts (security-critical, always block)
   "system prompt", "your instructions", "your prompt",
   "ignore your", "ignore previous", "you are now", "developer mode",
-  "jailbreak", "pretend you", "roleplay", "role-play", "role play",
-  "act as", "respond as if",
+  "jailbreak", "act as if", "respond as if",
 ];
 
 function containsAnyWord(text: string, words: string[]): boolean {
