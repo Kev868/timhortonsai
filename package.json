@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "embeddings": "node scripts/compute-embeddings.mjs",
+    "eval": "node scripts/run-eval.mjs"
   },
   "dependencies": {
     "next": "16.2.6",
