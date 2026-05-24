@@ -193,8 +193,7 @@ const SCENARIOS = [
     ],
     expected_tools: [],
     voice_rules: [
-      "Politely declines to answer (out of scope).",
-      "Redirects to a Tim Hortons-related thing if natural, or just acknowledges the limit.",
+      "Politely declines to answer (out of scope), naming the limit.",
       "Does NOT make up weather info.",
       "Does NOT contain any emoji.",
     ],
