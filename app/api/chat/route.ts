@@ -3,7 +3,7 @@ import type { ChatCompletionMessageParam } from "openai/resources/chat/completio
 import { getOpenAI, MODEL } from "@/lib/openai";
 import { callTool, resetMockState, toolSchemas } from "@/lib/tools";
 import { SYSTEM_PROMPT } from "@/lib/system-prompt";
-import { classifyScope, OUT_OF_SCOPE_REFUSAL } from "@/lib/scope";
+import { fastScopeCheck, OUT_OF_SCOPE_REFUSAL } from "@/lib/scope";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -45,24 +45,20 @@ export async function POST(req: NextRequest) {
           .find((m) => m.role === "user");
 
         if (latestUser) {
-          const scopeCallId = `scope-${Date.now()}`;
-          send({
-            type: "tool_call_start",
-            id: scopeCallId,
-            name: "scope_check",
-            args: { message: latestUser.content },
-          });
-          const scope = await classifyScope(
-            latestUser.content,
-            clientMessages.slice(0, -1)
-          );
-          send({
-            type: "tool_call_end",
-            id: scopeCallId,
-            result: { in_scope: scope.in_scope, reason: scope.reason },
-          });
-
+          const scope = fastScopeCheck(latestUser.content);
           if (!scope.in_scope) {
+            const scopeCallId = `scope-${Date.now()}`;
+            send({
+              type: "tool_call_start",
+              id: scopeCallId,
+              name: "scope_check",
+              args: { message: latestUser.content },
+            });
+            send({
+              type: "tool_call_end",
+              id: scopeCallId,
+              result: { in_scope: false, reason: scope.reason },
+            });
             send({ type: "text_delta", text: OUT_OF_SCOPE_REFUSAL });
             send({ type: "done" });
             controller.close();
