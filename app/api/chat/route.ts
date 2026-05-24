@@ -61,7 +61,6 @@ export async function POST(req: NextRequest) {
             });
             send({ type: "text_delta", text: OUT_OF_SCOPE_REFUSAL });
             send({ type: "done" });
-            controller.close();
             return;
           }
         }
