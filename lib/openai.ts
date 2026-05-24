@@ -7,7 +7,7 @@ let togetherClient: OpenAI | null = null;
 // - OpenAI model id (no "/"): routes to OpenAI (e.g. "gpt-4o", "gpt-4o-mini")
 // - Together model id (contains "/"): routes to Together AI's OpenAI-compatible
 //   endpoint (e.g. "yourname/Meta-Llama-3.1-70B-Instruct-Reference-tims-xxx")
-export const MODEL = "gpt-4o";
+export const MODEL = "lingfengge72_ec1b/Meta-Llama-3.1-70B-Instruct-Reference-tims-e6a26d7a";
 
 // OpenAI client. Used for embeddings (RAG) and the eval LLM-as-judge regardless
 // of which chat model we route to.
