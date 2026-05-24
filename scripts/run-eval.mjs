@@ -71,8 +71,8 @@ const SCENARIOS = [
     ],
     expected_tools: ["lookup_account", "check_rewards_balance"],
     voice_rules: [
-      "Reports the visible balance clearly.",
-      "Mentions the discrepancy (visible vs expected) if one exists.",
+      "Response contains the number 0 (the visible balance).",
+      "Response contains the number 850 (the expected balance) AND mentions a discrepancy or sync issue.",
       "Voice is conversational, not formal database-readout.",
       "Does NOT contain any emoji.",
     ],
@@ -248,7 +248,10 @@ async function runAgent(messages) {
       try {
         const ev = JSON.parse(t);
         if (ev.type === "text_delta") text += ev.text;
-        else if (ev.type === "tool_call_start") tools.push(ev.name);
+        else if (ev.type === "tool_call_start" && ev.name !== "scope_check") {
+          // Exclude the meta scope_check tool from agent tool counting
+          tools.push(ev.name);
+        }
       } catch {
         // skip parse failures
       }
