@@ -83,21 +83,18 @@ Streaming protocol is NDJSON over `fetch` one event per line: `text_delta`, `too
 | Iterated prompt + RAG + gpt-4o (in production) | **100%** | **1.00** | **10/10** |
 | Fine-tuned Llama-3.1-70B (LoRA) | 0% (tool-format mismatch) | n/a | 0/10 |
 
-
-
-
-and why that's actually a more useful finding than a clean comparison number would have been. Keep this honest. The fact that you ran the experiment, hit the gotcha, diagnosed it, and made a real production call beats any synthetic "fine-tuned X% better" number you could have manufactured.)*
+Unfortunately I could not obtain further Llama stats due to me running out of money to host it (at around 1 dollar per minute), and another thing I would do quickly is to test it's parameters after fine-tuning to see if they match
 
 ---
 
 ## What I'd build next
 
 
-- Hybrid retrieval (BM25 + dense + reciprocal rank fusion) to catch literal-term queries the cosine-only retriever misses.
-- Self-critique loop: agent reviews its own response against the system prompt before sending, regenerates if it violates a rule.
-- Cross-conversation memory (per-customer): summarize past interactions, retrieve relevant context for repeat customers.
-- Structured outputs with Zod schemas on every tool result, with retry-on-schema-failure.
-- Real eval on production traffic, not just scripted scenarios.
+- Hybrid retrieval (BM25 + dense + reciprocal rank fusion) to catch literal-term queries the cosine-only retriever misses
+- Self-critique loop: agent reviews its own response against the system prompt before sending, regenerates if it violates a rule
+- Cross-conversation memory (per-customer): summarize past interactions, retrieve relevant context for repeat customers
+- Structured outputs with Zod schemas on every tool result, with retry-on-schema-failure
+- Real eval on production traffic
 
 ---
 
