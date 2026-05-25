@@ -58,10 +58,12 @@ Streaming protocol is NDJSON over `fetch` — one event per line: `text_delta`, 
 - The prompt iteration alone got 10/10 on the eval harness. Most candidates would have stopped there.
 - I fine-tuned anyway because (a) it distills the prompt patterns into a smaller cheaper model and (b) reduces run-to-run variance.
 
-**Fine-tuned Llama-3.1-70B-Instruct via LoRA on Together AI.**
+**Fine-tuned Llama-3.1-70B-Instruct via LoRA on Together AI — instructive failure.**
 - 25 multi-turn examples covering Sarah's golden path, balance checks, FAQ retrieval, refund/perk-swap flows, off-topic refusals.
-- LoRA rank 64, alpha 128, 3 epochs, batch size 8, learning rate 1e-5, cosine LR schedule.
-- *Note:* Originally targeted OpenAI fine-tuning — they're sunsetting self-serve mid-2026. Pivoted to Together. The pivot is itself a signal: the platform landscape shifts fast, and you need to know how to move.
+- LoRA rank 64, alpha 128, 3 epochs, batch size 8, learning rate 1e-5, cosine LR schedule. Training ran 28 min, cost $4 on Together.
+- **Discovered at inference time:** the fine-tuned model emits tool calls as raw JSON text strings rather than invoking them as structured `tool_calls`. Root cause: our dataset stored tool calls in OpenAI's JSON format, and Llama-3.1 learned to literally output that JSON as text content. Llama uses `<|python_tag|>` tokens for native function calling, which is incompatible with the OpenAI tool-call format we trained on.
+- *Honest call:* shipped gpt-4o in production. The fine-tuning artifact is on Together (`lingfengge72_ec1b/Meta-Llama-3.1-70B-Instruct-Reference-tims-e6a26d7a`) and the training script + dataset are reproducible from this repo. For a real production deploy, the fix is to reformat the JSONL into Llama's native tool-calling format before fine-tuning, then re-evaluate.
+- *Also worth knowing:* originally targeted OpenAI fine-tuning — they're sunsetting self-serve mid-2026. Pivoted to Together. The pivot is itself a signal: the platform landscape shifts fast.
 
 **LLM-as-judge eval harness.**
 - 10 scripted scenarios, each with `expected_tools` and a list of voice rules.
@@ -80,10 +82,10 @@ Streaming protocol is NDJSON over `fetch` — one event per line: `text_delta`, 
 
 | Configuration | Tool accuracy | Voice score | Pass rate |
 |---|---|---|---|
-| Iterated prompt + RAG + gpt-4o | **100%** | **1.00** | **10/10** |
-| Fine-tuned Llama-3.1-70B (LoRA) | TODO% | TODO | TODO/10 |
+| Iterated prompt + RAG + gpt-4o (in production) | **100%** | **1.00** | **10/10** |
+| Fine-tuned Llama-3.1-70B (LoRA) | 0% (tool-format mismatch) | n/a | 0/10 |
 
-*(One paragraph in your voice: what the gap between gpt-4o and fine-tuned Llama looked like, whether the fine-tuned model is actually good enough to ship.)*
+*(One paragraph in your voice: what the fine-tune experiment surfaced — the Llama-vs-OpenAI tool-format incompatibility — and why that's actually a more useful finding than a clean comparison number would have been. Keep this honest. The fact that you ran the experiment, hit the gotcha, diagnosed it, and made a real production call beats any synthetic "fine-tuned X% better" number you could have manufactured.)*
 
 ---
 
@@ -102,8 +104,8 @@ Streaming protocol is NDJSON over `fetch` — one event per line: `text_delta`, 
 ## Stack
 
 - Next.js 16.2 (App Router) · React 19 · TypeScript · Tailwind v4
-- OpenAI: `gpt-4o` for the agent loop (baseline), `text-embedding-3-small` for embeddings, `gpt-4o-mini` as eval judge
-- Together AI: Llama-3.1-70B-Instruct (fine-tuned via LoRA)
+- OpenAI: `gpt-4o` for the agent loop (production), `text-embedding-3-small` for embeddings, `gpt-4o-mini` as eval judge
+- Together AI: Llama-3.1-70B-Instruct fine-tuned via LoRA (training artifact, not in production — see "Why these technical choices" for why)
 - Deployed on Vercel
 
 ---
