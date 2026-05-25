@@ -1,6 +1,6 @@
 # Tim Hortons AI Customer Care
 
-> One-line pitch (write this last, after the whole README is drafted). Aim for "a Sierra-style customer service agent for Tim Hortons that takes multi-step action in brand voice, not just answers FAQs."
+Tim Horton's is infamous for their recently lackluster customer service. As a major food service, I believe this is an area that can be easily improved, especially with Sierra's services.
 
 **Live demo:** https://timhortonsaiproject.vercel.app/
 **Repo:** https://github.com/Kev868/timhortonsai
