@@ -1,4 +1,4 @@
-# Tim Hortons AI Agent — Project Handoff
+# Tim Hortons AI Agent: Project Handoff
 
 ## Mission
 
@@ -10,7 +10,7 @@ The thesis we are proving: **a competent AI agent doesn't just answer questions,
 
 Sunday, May 24, 2026, end of day. Deploy by 8pm Eastern.
 
-## Tech Stack (locked — do not propose alternatives)
+## Tech Stack (locked, do not propose alternatives)
 
 - Next.js 15 with App Router, TypeScript, Tailwind CSS
 - OpenAI API: `gpt-4o` for the agent loop, `text-embedding-3-small` for RAG
@@ -28,7 +28,7 @@ Sunday, May 24, 2026, end of day. Deploy by 8pm Eastern.
 - User has an OpenAI API key (starts with `sk-proj-`) ready to add to `.env.local`
 - `.env.local` does NOT yet exist; create it as Phase 1 step 1
 
-## The Demo Scenario (the spine — every code decision serves this)
+## The Demo Scenario (the spine; every code decision serves this)
 
 **Setup:** A customer named Sarah Chen just placed a mobile order in Toronto. Her Tims Rewards points show 0 in the app, but yesterday she had 850 points and was planning to redeem a free coffee. She is mildly annoyed and confused.
 
@@ -136,14 +136,14 @@ This scenario demonstrates: multi-step reasoning, four tool calls, empathy model
 - Display font for headers: `Sherbrook` (Tim's official, may not be available) → fallback to `Source Serif Pro` or a warm serif
 - If using Google Fonts, import them properly in `app/layout.tsx`
 
-**Voice — this is the heart of the demo, iterate hard:**
+**Voice. This is the heart of the demo, iterate hard:**
 
 The agent must sound like Tim Hortons, not like ChatGPT cosplaying Tim Hortons. Tone is warm, slightly self-deprecating, recognizably Canadian, comfortable.
 
 ✅ Right voice examples:
 - "Oh no, the Tims app is acting up again, eh? Let me have a look for ya."
 - "Found it, Sarah. Looks like your points took a little detour through Calgary."
-- "All sorted — 850 points back where they belong. Also throwing a free coffee your way for the trouble. Sound good?"
+- "All sorted, 850 points back where they belong. Also throwing a free coffee your way for the trouble. Sound good?"
 
 ❌ Wrong voice examples:
 - "I apologize for the inconvenience. I will investigate this matter."
@@ -206,7 +206,7 @@ Steps:
 5. Build `Message.tsx` with distinct styles for user vs agent
 6. Build `ChatContainer.tsx` with hardcoded sample conversation
 7. Replace default `app/page.tsx` with the new layout
-8. Verify on localhost:3000 — should look like a Tim Hortons product, not a generic chatbot
+8. Verify on localhost:3000; should look like a Tim Hortons product, not a generic chatbot
 
 Commit at end of Phase 1: `git commit -am "Phase 1 complete: branded UI shell"`
 
@@ -235,13 +235,13 @@ Goal: a link that looks like a real product, ready to send to Clay Bavor.
 Steps:
 1. Brand fidelity pass: open user's reference screenshots, pixel-match where reasonable
 2. Add loading states, smooth transitions, subtle animations
-3. Make `ToolCallCard` beautiful — this is the "wow" moment
+3. Make `ToolCallCard` beautiful. This is the "wow" moment
 4. Record 60-second demo video walking through the scenario
 5. Deploy to Vercel (`vercel --prod`)
 6. Final smoke test on deployed URL
 7. Final git commit: `git commit -am "Phase 3 complete: shipped"`
 
-## Quality Bar (anti-slop measures — strictly enforced)
+## Quality Bar (anti-slop measures, strictly enforced)
 
 This demo must NOT look AI-generated. Specifically avoid:
 
@@ -275,7 +275,7 @@ This demo must NOT look AI-generated. Specifically avoid:
 The user (K) is an Electrical Engineering student at the University of Waterloo. Solid React/TypeScript experience, limited LLM/agent experience. He is intentionally using AI assistance and wants to ship by Sunday night.
 
 - Be specific and concrete. He prefers numbered steps and explicit commands.
-- He has asked for slower pacing — one step at a time, wait for confirmation before proceeding.
+- He has asked for slower pacing, one step at a time, wait for confirmation before proceeding.
 - He values critical feedback. Do not sugarcoat.
 - **He prefers no em dashes in any text output.** Use commas, periods, or parentheses instead.
 - Commit to git frequently with descriptive messages. He may not remember to.
